@@ -1,0 +1,687 @@
+<div class="create-page">
+
+
+  <!-- =====================================================
+       MODAL HEADER
+  ====================================================== -->
+
+  @if (isModal) {
+
+    <div class="modal-header">
+
+      <div class="modal-title-area">
+
+        <div class="modal-icon">
+          🖥️
+        </div>
+
+        <div>
+
+          <h2>
+            {{
+              isEdit
+                ? 'Edit Remote PC'
+                : 'Add Remote PC'
+            }}
+          </h2>
+
+          <p>
+            {{
+              isEdit
+                ? 'Update the connection details of the remote computer.'
+                : 'Register a computer to access and manage it remotely.'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="modal-close-btn"
+        (click)="cancel()"
+        aria-label="Close">
+
+        ×
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       NORMAL PAGE HEADER
+  ====================================================== -->
+
+  @if (!isModal) {
+
+    <div class="page-header">
+
+      <div>
+
+        <h2>
+          {{
+            isEdit
+              ? 'Edit Remote PC'
+              : 'Add Remote PC'
+          }}
+        </h2>
+
+        <p>
+          {{
+            isEdit
+              ? 'Update the connection details of the remote computer.'
+              : 'Register a computer to access and manage it remotely.'
+          }}
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="back-btn"
+        (click)="cancel()">
+
+        ← Back to PCs
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       FORM LAYOUT
+  ====================================================== -->
+
+  <div class="form-layout">
+
+
+    <!-- ===================================================
+         MAIN FORM
+    ==================================================== -->
+
+    <div class="form-card">
+
+
+      <!-- Card Header only for normal page -->
+
+      @if (!isModal) {
+
+        <div class="card-header">
+
+          <div class="header-icon">
+            🖥️
+          </div>
+
+          <div>
+
+            <h4>
+              Computer Information
+            </h4>
+
+            <p>
+              Enter the connection details of the remote computer.
+            </p>
+
+          </div>
+
+        </div>
+
+      }
+
+
+      <!-- =================================================
+           CARD BODY
+      ================================================== -->
+
+      <div class="card-body">
+
+        <form
+          [formGroup]="pcForm"
+          (ngSubmit)="save()">
+
+
+          <!-- =============================================
+               PC IDENTITY
+          ============================================== -->
+
+          <div class="form-section">
+
+            <div class="section-title">
+
+              <span>
+                1
+              </span>
+
+              PC Identity
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+              <!-- PC ID -->
+
+              <div class="col-md-6">
+
+                <label class="form-label">
+
+                  PC ID
+
+                  <span>
+                    *
+                  </span>
+
+                </label>
+
+
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  formControlName="pcId"
+                  placeholder="PC-001">
+
+
+                @if (
+                  pcForm.controls.pcId.touched &&
+                  pcForm.controls.pcId.invalid
+                ) {
+
+                  <div class="error-message">
+
+                    PC ID is required.
+
+                  </div>
+
+                }
+
+
+                @if (isEdit) {
+
+                  <small class="input-help">
+
+                    PC ID cannot be changed.
+
+                  </small>
+
+                } @else {
+
+                  <small class="input-help">
+
+                    A unique identifier for this computer.
+
+                  </small>
+
+                }
+
+              </div>
+
+
+              <!-- PC NAME -->
+
+              <div class="col-md-6">
+
+                <label class="form-label">
+
+                  PC Name
+
+                  <span>
+                    *
+                  </span>
+
+                </label>
+
+
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  formControlName="name"
+                  placeholder="Development PC">
+
+
+                @if (
+                  pcForm.controls.name.touched &&
+                  pcForm.controls.name.invalid
+                ) {
+
+                  <div class="error-message">
+
+                    PC name is required.
+
+                  </div>
+
+                }
+
+
+                <small class="input-help">
+
+                  A friendly name to identify the computer.
+
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =============================================
+               CONNECTION DETAILS
+          ============================================== -->
+
+          <div class="form-section">
+
+            <div class="section-title">
+
+              <span>
+                2
+              </span>
+
+              Connection Details
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+              <!-- HOST -->
+
+              <div class="col-md-8">
+
+                <label class="form-label">
+
+                  IP Address / Host
+
+                  <span>
+                    *
+                  </span>
+
+                </label>
+
+
+                <div class="input-with-icon">
+
+                  <span>
+                    🌐
+                  </span>
+
+
+                  <input
+                    type="text"
+                    class="form-control custom-input"
+                    formControlName="host"
+                    placeholder="192.168.0.165">
+
+                </div>
+
+
+                @if (
+                  pcForm.controls.host.touched &&
+                  pcForm.controls.host.invalid
+                ) {
+
+                  <div class="error-message">
+
+                    IP address or host is required.
+
+                  </div>
+
+                }
+
+
+                <small class="input-help">
+
+                  Example: 192.168.0.165 or remote-pc.company.com
+
+                </small>
+
+              </div>
+
+
+              <!-- VNC PORT -->
+
+              <div class="col-md-4">
+
+                <label class="form-label">
+
+                  VNC Port
+
+                  <span>
+                    *
+                  </span>
+
+                </label>
+
+
+                <input
+                  type="number"
+                  class="form-control custom-input"
+                  formControlName="vncPort"
+                  placeholder="5900">
+
+
+                @if (
+                  pcForm.controls.vncPort.touched &&
+                  pcForm.controls.vncPort.invalid
+                ) {
+
+                  <div class="error-message">
+
+                    Enter a valid port.
+
+                  </div>
+
+                }
+
+
+                <small class="input-help">
+
+                  Default VNC port: 5900
+
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =============================================
+               STATUS
+          ============================================== -->
+
+          @if (isEdit) {
+
+            <div class="form-section status-section">
+
+              <div class="section-title">
+
+                <span>
+                  3
+                </span>
+
+                PC Status
+
+              </div>
+
+
+              <div class="active-control">
+
+                <label class="switch">
+
+                  <input
+                    type="checkbox"
+                    formControlName="isActive">
+
+                  <span class="slider"></span>
+
+                </label>
+
+
+                <div>
+
+                  <strong>
+
+                    {{
+                      pcForm.controls.isActive.value
+                        ? 'Active'
+                        : 'Inactive'
+                    }}
+
+                  </strong>
+
+                  <small>
+
+                    {{
+                      pcForm.controls.isActive.value
+                        ? 'This PC can be accessed remotely.'
+                        : 'This PC is disabled for remote access.'
+                    }}
+
+                  </small>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          <!-- =============================================
+               CONNECTION PREVIEW
+          ============================================== -->
+
+          <div class="connection-preview">
+
+            <div class="preview-icon">
+              🔗
+            </div>
+
+
+            <div class="preview-content">
+
+              <span>
+                Connection endpoint
+              </span>
+
+
+              <strong>
+
+                {{
+                  pcForm.controls.host.value ||
+                  'Host'
+                }}:{{
+                  pcForm.controls.vncPort.value ||
+                  '5900'
+                }}
+
+              </strong>
+
+            </div>
+
+
+            <div class="preview-status">
+
+              Ready
+
+            </div>
+
+          </div>
+
+
+          <!-- =============================================
+               ACTIONS
+          ============================================== -->
+
+          <div class="form-actions">
+
+
+            <button
+              type="button"
+              class="cancel-btn"
+              (click)="cancel()">
+
+              Cancel
+
+            </button>
+
+
+            <button
+              type="submit"
+              class="save-btn"
+              [disabled]="saving">
+
+
+              @if (saving) {
+
+                <span class="button-loader"></span>
+
+                Saving...
+
+              } @else {
+
+                <span>
+                  ✓
+                </span>
+
+                {{
+                  isEdit
+                    ? 'Save Changes'
+                    : 'Add Remote PC'
+                }}
+
+              }
+
+            </button>
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         INFORMATION CARD
+    ==================================================== -->
+
+    <div class="info-card">
+
+      <div class="info-header">
+
+        <div class="info-icon">
+          💡
+        </div>
+
+        <h4>
+          Before you add a PC
+        </h4>
+
+      </div>
+
+
+      <!-- ITEM 1 -->
+
+      <div class="info-item">
+
+        <div class="info-number">
+          1
+        </div>
+
+        <div>
+
+          <strong>
+            Install VNC Server
+          </strong>
+
+          <p>
+
+            Make sure a VNC server such as TightVNC is
+            installed and running on the remote computer.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ITEM 2 -->
+
+      <div class="info-item">
+
+        <div class="info-number">
+          2
+        </div>
+
+        <div>
+
+          <strong>
+            Check Network Access
+          </strong>
+
+          <p>
+
+            The remote computer must be reachable from
+            the RemoteDesk server.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ITEM 3 -->
+
+      <div class="info-item">
+
+        <div class="info-number">
+          3
+        </div>
+
+        <div>
+
+          <strong>
+            Verify VNC Port
+          </strong>
+
+          <p>
+
+            Ensure the VNC server is listening on the
+            configured port, normally 5900.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SECURITY -->
+
+      <div class="security-note">
+
+        <span>
+          🔐
+        </span>
+
+        <div>
+
+          <strong>
+            Security
+          </strong>
+
+          <p>
+
+            In production, remote connections should be
+            authenticated and encrypted.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

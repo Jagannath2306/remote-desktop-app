@@ -1,0 +1,638 @@
+<div class="network-devices-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-title">
+
+      <div class="title-icon">
+        🌐
+      </div>
+
+      <div>
+
+        <h1>Network Devices</h1>
+
+        <p>
+          Devices detected on your local network
+        </p>
+
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="refresh-btn"
+      (click)="refresh()"
+      [disabled]="refreshing">
+
+      @if (refreshing) {
+        <span class="spinner"></span>
+        Scanning...
+      } @else {
+        <span class="refresh-icon">↻</span>
+        Refresh
+      }
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY CARDS
+       ===================================================== -->
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon total">
+        🌐
+      </div>
+
+      <div class="summary-content">
+
+        <span>Total Devices</span>
+
+        <strong>
+          {{ totalDevices }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon router">
+        📡
+      </div>
+
+      <div class="summary-content">
+
+        <span>Routers</span>
+
+        <strong>
+          {{ getDeviceCount('router') }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon computer">
+        🖥️
+      </div>
+
+      <div class="summary-content">
+
+        <span>Computers</span>
+
+        <strong>
+          {{
+            getDeviceCount('desktop') +
+            getDeviceCount('laptop')
+          }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon mobile">
+        📱
+      </div>
+
+      <div class="summary-content">
+
+        <span>Mobile</span>
+
+        <strong>
+          {{ getDeviceCount('mobile') }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon tablet">
+        📟
+      </div>
+
+      <div class="summary-content">
+
+        <span>Tablets</span>
+
+        <strong>
+          {{ getDeviceCount('tablet') }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ERROR
+       ===================================================== -->
+
+  @if (errorMessage) {
+
+    <div class="error-message">
+
+      <span class="error-icon">
+        ⚠
+      </span>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+
+      <button
+        type="button"
+        (click)="refresh()">
+
+        Try Again
+
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       FILTER BAR
+       ===================================================== -->
+
+  <div class="filter-card">
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        🔍
+      </span>
+
+      <input
+        type="text"
+        placeholder="Search by IP, MAC, hostname or manufacturer..."
+        [value]="searchText"
+        (input)="onSearchChange($event)" />
+
+    </div>
+
+
+    <div class="type-filter">
+
+      <label for="deviceType">
+        Device Type
+      </label>
+
+      <select
+        id="deviceType"
+        [value]="selectedDeviceType"
+        (change)="onDeviceTypeChange($event)">
+
+        <option value="all">
+          All Devices
+        </option>
+
+        <option value="router">
+          Router
+        </option>
+
+        <option value="desktop">
+          Desktop
+        </option>
+
+        <option value="laptop">
+          Laptop
+        </option>
+
+        <option value="mobile">
+          Mobile
+        </option>
+
+        <option value="tablet">
+          Tablet
+        </option>
+
+        <option value="unknown">
+          Unknown
+        </option>
+
+      </select>
+
+    </div>
+
+
+    @if (
+      searchText ||
+      selectedDeviceType !== 'all'
+    ) {
+
+      <button
+        type="button"
+        class="clear-filter-btn"
+        (click)="clearFilters()">
+
+        Clear
+
+      </button>
+
+    }
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+       ===================================================== -->
+
+  @if (loading) {
+
+    <div class="loading-container">
+
+      <div class="loading-spinner"></div>
+
+      <p>
+        Scanning local network...
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       DEVICE TABLE
+       ===================================================== -->
+
+  @if (!loading && filteredDevices.length > 0) {
+
+    <div class="devices-card">
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Detected Devices
+          </h2>
+
+          <span>
+            Showing
+            {{ filteredDevices.length }}
+            of
+            {{ totalDevices }}
+            devices
+          </span>
+
+        </div>
+
+        <div class="scan-status">
+
+          <span class="online-dot"></span>
+
+          Network scan active
+
+        </div>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Device
+              </th>
+
+              <th>
+                IP Address
+              </th>
+
+              <th>
+                MAC Address
+              </th>
+
+              <th>
+                Manufacturer
+              </th>
+
+              <th>
+                Type
+              </th>
+
+              <th>
+                Confidence
+              </th>
+
+              <th>
+                Open Ports
+              </th>
+
+              <th>
+                Status
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (
+              device of filteredDevices;
+              track device.ip
+            ) {
+
+              <tr>
+
+                <!-- DEVICE -->
+
+                <td>
+
+                  <div class="device-info">
+
+                    <div class="device-icon">
+
+                      {{ getDeviceIcon(
+                        device.deviceType
+                      ) }}
+
+                    </div>
+
+                    <div>
+
+                      <strong>
+                        @if (
+                          device.hostname &&
+                          device.hostname !== 'Unknown'
+                        ) {
+
+                          {{ device.hostname }}
+
+                        } @else {
+
+                          {{ device.ip }}
+
+                        }
+                      </strong>
+
+                      <small>
+                        {{ device.detectionMethod }}
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- IP -->
+
+                <td>
+
+                  <span class="ip-address">
+                    {{ device.ip }}
+                  </span>
+
+                </td>
+
+
+                <!-- MAC -->
+
+                <td>
+
+                  <span class="mac-address">
+                    {{ device.mac }}
+                  </span>
+
+                </td>
+
+
+                <!-- MANUFACTURER -->
+
+                <td>
+
+                  @if (
+                    device.manufacturer &&
+                    device.manufacturer !== 'Unknown'
+                  ) {
+
+                    <span>
+                      {{ device.manufacturer }}
+                    </span>
+
+                  } @else {
+
+                    <span class="unknown-text">
+                      Unknown
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- TYPE -->
+
+                <td>
+
+                  <span
+                    class="device-type"
+                    [class.router]="
+                      device.deviceType === 'router'
+                    "
+                    [class.desktop]="
+                      device.deviceType === 'desktop'
+                    "
+                    [class.laptop]="
+                      device.deviceType === 'laptop'
+                    "
+                    [class.mobile]="
+                      device.deviceType === 'mobile'
+                    "
+                    [class.tablet]="
+                      device.deviceType === 'tablet'
+                    "
+                    [class.unknown]="
+                      device.deviceType === 'unknown'
+                    ">
+
+                    <span>
+                      {{ getDeviceIcon(
+                        device.deviceType
+                      ) }}
+                    </span>
+
+                    {{ getDeviceTypeLabel(
+                      device.deviceType
+                    ) }}
+
+                  </span>
+
+                </td>
+
+
+                <!-- CONFIDENCE -->
+
+                <td>
+
+                  <span
+                    class="confidence-badge"
+                    [class]="
+                      getConfidenceClass(
+                        device.confidence
+                      )
+                    ">
+
+                    {{ getConfidenceLabel(
+                      device.confidence
+                    ) }}
+
+                  </span>
+
+                </td>
+
+
+                <!-- PORTS -->
+
+                <td>
+
+                  @if (
+                    device.openPorts &&
+                    device.openPorts.length > 0
+                  ) {
+
+                    <div class="ports">
+
+                      @for (
+                        port of device.openPorts;
+                        track port
+                      ) {
+
+                        <span class="port">
+                          {{ port }}
+                        </span>
+
+                      }
+
+                    </div>
+
+                  } @else {
+
+                    <span class="unknown-text">
+                      None
+                    </span>
+
+                  }
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+                  <div class="status online">
+
+                    <span class="status-dot"></span>
+
+                    Online
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       NO DEVICES
+       ===================================================== -->
+
+  @if (
+    !loading &&
+    filteredDevices.length === 0
+  ) {
+
+    <div class="empty-state">
+
+      <div class="empty-icon">
+        🌐
+      </div>
+
+      @if (devices.length === 0) {
+
+        <h2>
+          No Devices Found
+        </h2>
+
+        <p>
+          No devices were detected on the local network.
+        </p>
+
+      } @else {
+
+        <h2>
+          No Matching Devices
+        </h2>
+
+        <p>
+          No devices match your current search or filter.
+        </p>
+
+        <button
+          type="button"
+          class="clear-filter-btn large"
+          (click)="clearFilters()">
+
+          Clear Filters
+
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+</div>

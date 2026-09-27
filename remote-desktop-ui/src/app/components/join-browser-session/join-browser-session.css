@@ -1,0 +1,340 @@
+:host {
+  display: block;
+
+  min-height: 100vh;
+}
+
+.join-page {
+  min-height: 100vh;
+
+  padding: 30px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+}
+
+.join-card {
+  width: 100%;
+
+  width: 100%;
+
+  padding: 36px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.join-icon {
+  width: 58px;
+  height: 58px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: #eff6ff;
+
+  font-size: 27px;
+}
+
+h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.description {
+  margin: 10px 0 28px;
+
+  color: #667085;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.join-form {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.join-form label {
+  margin-bottom: 7px;
+
+  color: #757f8f;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.join-form input {
+  width: 100%;
+
+  height: 46px;
+
+  padding: 0 14px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #101828;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.join-form input:focus {
+  border-color: #84adff;
+
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.join-form input::placeholder {
+  color: #98a2b3;
+}
+
+.error-message {
+  margin-top: 8px;
+
+  color: #b42318;
+
+  font-size: 12px;
+}
+
+.join-btn {
+  width: 100%;
+
+  height: 46px;
+
+  margin-top: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.join-btn:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+.join-btn:active {
+  transform: translateY(0);
+}
+
+.permission-info {
+  margin-top: 22px;
+
+  padding: 12px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  border: 1px solid #dbeafe;
+
+  border-radius: 8px;
+
+  background: #eff6ff;
+
+  color: #475467;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.info-icon {
+  color: #2563eb;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .join-page {
+    padding: 20px 14px;
+  }
+
+  .join-card {
+    padding: 26px 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+
+.join-button {
+  width: 100%;
+
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.1s ease;
+}
+
+
+.join-button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+
+.join-button:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+
+/*
+ * Joining state
+ */
+.join-button.joining {
+  background: #64748b;
+
+  cursor: wait;
+}
+
+
+/*
+ * Disabled state
+ */
+.join-button:disabled {
+  opacity: 0.75;
+}
+
+
+/*
+ * Spinner
+ */
+.button-spinner {
+  width: 17px;
+  height: 17px;
+
+  border: 2px solid
+    rgba(255, 255, 255, 0.4);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation:
+    join-button-spin 0.8s linear infinite;
+}
+
+
+@keyframes join-button-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+.error-message {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: 4px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+
+  background: #fef2f2;
+
+  color: #b91c1c;
+
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+
+.error-icon {
+  flex-shrink: 0;
+
+  font-size: 15px;
+}

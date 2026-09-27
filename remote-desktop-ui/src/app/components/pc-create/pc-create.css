@@ -1,0 +1,974 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.create-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   NORMAL PAGE HEADER
+========================================================= */
+
+.page-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin: 0;
+
+  font-size: 24px;
+
+  font-weight: 600;
+
+  color: #1f2937;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+
+  font-size: 13px;
+
+  color: #8a94a6;
+}
+
+
+/* =========================================================
+   NORMAL BACK BUTTON
+========================================================= */
+
+.back-btn {
+  border: 1px solid #e1e5eb;
+
+  background: #ffffff;
+
+  color: #4b5563;
+
+  padding: 9px 15px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #f8fafc;
+
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.modal-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px 25px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+
+/* =========================================================
+   MODAL TITLE
+========================================================= */
+
+.modal-title-area {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+.modal-icon {
+  width: 44px;
+
+  height: 44px;
+
+  min-width: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eff6ff;
+
+  font-size: 20px;
+}
+
+.modal-title-area h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 19px;
+
+  font-weight: 600;
+}
+
+.modal-title-area p {
+  margin: 4px 0 0;
+
+  color: #8a94a6;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.modal-close-btn {
+  width: 36px;
+
+  height: 36px;
+
+  min-width: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid #e1e5eb;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #6b7280;
+
+  font-size: 24px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #fef2f2;
+
+  border-color: #fecaca;
+
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.form-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) 320px;
+
+  gap: 20px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.form-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   NORMAL CARD HEADER
+========================================================= */
+
+.card-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 22px 25px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.header-icon {
+  width: 45px;
+
+  height: 45px;
+
+  border-radius: 10px;
+
+  background: #eff6ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 21px;
+}
+
+.card-header h4 {
+  margin: 0;
+
+  font-size: 16px;
+
+  color: #1f2937;
+}
+
+.card-header p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  color: #9ca3af;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.card-body {
+  padding: 25px;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.form-section {
+  padding-bottom: 25px;
+
+  margin-bottom: 25px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.section-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: #374151;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.section-title span {
+  width: 25px;
+
+  height: 25px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+.form-label {
+  display: block;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #374151;
+
+  margin-bottom: 7px;
+}
+
+.form-label span {
+  color: #ef4444;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.custom-input {
+  height: 42px;
+
+  border: 1px solid #dfe3e8;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+
+  color: #374151;
+
+  box-shadow: none;
+}
+
+.custom-input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.custom-input::placeholder {
+  color: #b0b7c3;
+}
+
+.custom-input:disabled {
+  background: #f3f4f6;
+
+  color: #9ca3af;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon > span {
+  position: absolute;
+
+  left: 12px;
+
+  top: 10px;
+
+  z-index: 2;
+
+  font-size: 15px;
+}
+
+.input-with-icon input {
+  padding-left: 38px;
+}
+
+
+/* =========================================================
+   HELP TEXT
+========================================================= */
+
+.input-help {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 10px;
+
+  color: #9ca3af;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-message {
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  color: #dc2626;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-section {
+  padding-bottom: 22px;
+}
+
+.active-control {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e7ebf0;
+}
+
+.active-control strong {
+  display: block;
+
+  color: #374151;
+
+  font-size: 12px;
+}
+
+.active-control small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9ca3af;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.switch {
+  position: relative;
+
+  width: 42px;
+
+  height: 22px;
+
+  display: inline-block;
+
+  flex-shrink: 0;
+}
+
+.switch input {
+  width: 0;
+
+  height: 0;
+
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 20px;
+
+  background: #adb5bd;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.slider::before {
+  content: "";
+
+  position: absolute;
+
+  width: 16px;
+
+  height: 16px;
+
+  left: 3px;
+
+  top: 3px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+  background: #198754;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+
+/* =========================================================
+   CONNECTION PREVIEW
+========================================================= */
+
+.connection-preview {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  margin-bottom: 25px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e7ebf0;
+}
+
+.preview-icon {
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 8px;
+
+  background: #ecfdf5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.preview-content {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.preview-content span {
+  font-size: 10px;
+
+  color: #9ca3af;
+}
+
+.preview-content strong {
+  margin-top: 3px;
+
+  font-size: 12px;
+
+  color: #374151;
+}
+
+.preview-status {
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  background: #ecfdf5;
+
+  color: #16a34a;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+}
+
+.cancel-btn {
+  height: 40px;
+
+  padding: 0 18px;
+
+  border: 1px solid #dfe3e8;
+
+  background: #ffffff;
+
+  border-radius: 7px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #f8fafc;
+}
+
+.save-btn {
+  height: 40px;
+
+  padding: 0 20px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
+}
+
+.save-btn:disabled {
+  background: #93b4f5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   BUTTON LOADER
+========================================================= */
+
+.button-loader {
+  width: 13px;
+
+  height: 13px;
+
+  border: 2px solid rgba(255,255,255,0.4);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   INFORMATION CARD
+========================================================= */
+
+.info-card {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  padding: 22px;
+}
+
+.info-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+.info-icon {
+  width: 35px;
+
+  height: 35px;
+
+  border-radius: 8px;
+
+  background: #fff7ed;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.info-header h4 {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #374151;
+}
+
+
+/* =========================================================
+   INFORMATION ITEMS
+========================================================= */
+
+.info-item {
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.info-number {
+  width: 25px;
+
+  height: 25px;
+
+  min-width: 25px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.info-item strong {
+  display: block;
+
+  font-size: 12px;
+
+  color: #374151;
+
+  margin-bottom: 4px;
+}
+
+.info-item p {
+  margin: 0;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+
+  color: #8a94a6;
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.security-note {
+  display: flex;
+
+  gap: 10px;
+
+  padding: 13px;
+
+  background: #eff6ff;
+
+  border-radius: 8px;
+
+  margin-top: 5px;
+}
+
+.security-note > span {
+  font-size: 16px;
+}
+
+.security-note strong {
+  font-size: 11px;
+
+  color: #1d4ed8;
+}
+
+.security-note p {
+  margin: 3px 0 0;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+
+  color: #64748b;
+}
+
+
+/* =========================================================
+   MODAL MODE
+========================================================= */
+
+:host-context(.pc-create-modal) .create-page {
+  max-width: none;
+
+  margin: 0;
+}
+
+:host-context(.pc-create-modal) .form-layout {
+  padding: 24px 25px 25px;
+
+  background: #f8fafc;
+}
+
+:host-context(.pc-create-modal) .form-card {
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+}
+
+:host-context(.pc-create-modal) .card-body {
+  padding: 25px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-card {
+    order: 2;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .modal-header {
+    padding: 16px 18px;
+  }
+
+  .modal-icon {
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    font-size: 18px;
+  }
+
+  .modal-title-area h2 {
+    font-size: 16px;
+  }
+
+  .modal-title-area p {
+    font-size: 10px;
+  }
+
+  .modal-close-btn {
+    width: 32px;
+
+    height: 32px;
+
+    min-width: 32px;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .card-header {
+    padding: 18px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  :host-context(.pc-create-modal) .form-layout {
+    padding: 12px;
+  }
+
+  :host-context(.pc-create-modal) .card-body {
+    padding: 18px;
+  }
+
+}

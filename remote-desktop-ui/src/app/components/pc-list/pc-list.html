@@ -1,0 +1,199 @@
+<div class="pc-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h2>Remote PCs</h2>
+      <p>Manage and connect to your registered computers.</p>
+    </div>
+
+    <button type="button" class="add-pc-btn" (click)="addPc()">
+      <span>+</span>
+      Add Remote PC
+    </button>
+  </div>
+
+  <!-- Statistics -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon total">🖥️</div>
+
+      <div>
+        <span>Total PCs</span>
+        <strong>{{ pcs.length }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon online">●</div>
+
+      <div>
+        <span>Online</span>
+        <strong>{{ getOnlineCount() }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon offline">●</div>
+
+      <div>
+        <span>Offline</span>
+        <strong>{{ getOfflineCount() }}</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon session">🔗</div>
+
+      <div>
+        <span>Active Sessions</span>
+        <strong>0</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search / Filter -->
+  <div class="toolbar">
+    <div class="search-box">
+      <span>⌕</span>
+
+      <input type="text" placeholder="Search remote PCs..." [(ngModel)]="searchText" />
+    </div>
+
+    <div class="filter-buttons">
+      <button type="button" [class.selected]="filter === 'all'" (click)="applyFilter('all')">
+        All
+      </button>
+
+      <button type="button" [class.selected]="filter === 'online'" (click)="applyFilter('online')">
+        Online
+      </button>
+
+      <button
+        type="button"
+        [class.selected]="filter === 'offline'"
+        (click)="applyFilter('offline')"
+      >
+        Offline
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="loading-container">
+      <div class="loader"></div>
+      <p>Loading remote PCs...</p>
+    </div>
+  }
+
+  <!-- Empty -->
+  @else if (filteredPcs.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">🖥️</div>
+
+      <h4>No remote PCs found</h4>
+
+      <p>Add a remote computer to start managing your machines.</p>
+
+      <button type="button" class="add-pc-btn" (click)="addPc()">+ Add Remote PC</button>
+    </div>
+  }
+
+  <!-- PC Cards -->
+  @else {
+    <div class="pc-grid">
+      @for (pc of filteredPcs; track pc._id) {
+        <div class="pc-card">
+          <!-- Card Header -->
+          <div class="pc-card-header">
+            <div class="pc-info">
+              <div class="pc-avatar">🖥</div>
+
+              <div>
+                <h4>{{ pc.name }}</h4>
+
+                <span class="pc-id">
+                  {{ pc.pcId }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Status -->
+
+            <!-- <div
+              class="status"
+              [class.online]="pc.status === 'online'"
+              [class.offline]="!pc.status === 'offline'">
+
+              <span class="status-dot"></span>
+
+              {{ pc.status === 'online' ? 'Online' : 'Offline' }}
+
+            </div> -->
+
+            <div
+              class="status"
+              [class.online]="pc.status === 'online'"
+              [class.offline]="pc.status === 'offline'"
+            >
+              <span class="status-dot"></span>
+
+              {{ pc.status === 'online' ? 'Online' : 'Offline' }}
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="card-divider"></div>
+
+          <!-- PC Details -->
+          <div class="pc-details">
+            <div class="detail">
+              <span class="detail-label"> IP Address </span>
+
+              <strong>
+                {{ pc.host }}
+              </strong>
+            </div>
+
+            <div class="detail">
+              <span class="detail-label"> VNC Port </span>
+
+              <strong>
+                {{ pc.vncPort }}
+              </strong>
+            </div>
+
+            <div class="detail">
+              <span class="detail-label"> Connection </span>
+
+              <strong> {{ pc.host }}:{{ pc.vncPort }} </strong>
+            </div>
+
+            <div class="detail">
+              <span class="detail-label"> Status </span>
+
+              <strong>
+                {{ pc.isActive ? 'Available' : 'Unavailable' }}
+              </strong>
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="pc-card-footer">
+            <button
+              type="button"
+              class="connect-btn"
+              [disabled]="!pc.isActive"
+              (click)="connect(pc)"
+            >
+              <span>↗</span>
+              Connect
+            </button>
+
+            <button type="button" class="more-btn">⋮</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

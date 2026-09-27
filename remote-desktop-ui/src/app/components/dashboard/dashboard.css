@@ -1,0 +1,746 @@
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.dashboard-header {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8fafc 100%
+  );
+
+  padding: 28px 30px;
+
+  border-radius: 16px;
+
+  border: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 28px;
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.welcome-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 12px;
+
+  background: #ecfeff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+
+  margin-bottom: 12px;
+}
+
+.dashboard-header h3 {
+  margin: 0 0 7px;
+
+  color: #1f2937;
+
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.dashboard-header p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.section-heading h4 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.section-heading p {
+  margin: 5px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 12px;
+}
+
+.view-all-link {
+  color: #2563eb;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+}
+
+.view-all-link:hover {
+  color: #1d4ed8;
+}
+
+.view-all-link span {
+  margin-left: 4px;
+}
+
+
+/* =========================================================
+   NETWORK CARDS
+   ========================================================= */
+
+.network-card {
+  position: relative;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  min-height: 170px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  overflow: hidden;
+}
+
+.network-card::after {
+  content: '';
+
+  position: absolute;
+
+  width: 70px;
+  height: 70px;
+
+  right: -25px;
+  bottom: -25px;
+
+  border-radius: 50%;
+
+  background: #f8fafc;
+
+  z-index: 0;
+}
+
+.network-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #d1d5db;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.network-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.network-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.network-icon {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+}
+
+.network-icon.total {
+  background: #ecfeff;
+}
+
+.network-icon.computers {
+  background: #eef2ff;
+}
+
+.network-icon.mobile {
+  background: #fff7ed;
+}
+
+.network-icon.router {
+  background: #ecfdf5;
+}
+
+.card-arrow {
+  color: #d1d5db;
+
+  font-size: 17px;
+}
+
+.network-card-label {
+  color: #6b7280;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+.network-card-value {
+  margin-top: 4px;
+
+  color: #111827;
+
+  font-size: 30px;
+
+  font-weight: 650;
+
+  line-height: 1.2;
+}
+
+.network-card-footer {
+  margin-top: 7px;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   NETWORK HEALTH
+   ========================================================= */
+
+.health-panel {
+  margin-top: 20px;
+
+  padding: 16px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.health-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+.health-icon {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #ecfdf5;
+
+  color: #16a34a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.health-left strong {
+  display: block;
+
+  color: #374151;
+
+  font-size: 13px;
+}
+
+.health-left p {
+  margin: 3px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+.health-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #16a34a;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow:
+    0 0 0 4px #dcfce7;
+}
+
+
+/* =========================================================
+   DASHBOARD PANELS
+   ========================================================= */
+
+.dashboard-panel {
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  padding: 22px;
+
+  height: 100%;
+}
+
+.chart-panel {
+  min-height: 400px;
+}
+
+.chart-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart-heading h5 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.chart-heading p {
+  margin: 4px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+.chart-container {
+  width: 100%;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   RECENT DEVICES
+   ========================================================= */
+
+.recent-panel {
+  margin-top: 20px;
+
+  padding: 0;
+}
+
+.recent-header {
+  padding: 20px 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.recent-header h5 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.recent-header p {
+  margin: 4px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+.recent-device {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 14px 22px;
+
+  border-bottom: 1px solid #f5f5f5;
+
+  transition: background 0.15s ease;
+}
+
+.recent-device:last-child {
+  border-bottom: none;
+}
+
+.recent-device:hover {
+  background: #f9fafb;
+}
+
+.recent-device-icon {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+.recent-device-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.recent-device-info strong {
+  display: block;
+
+  color: #374151;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.recent-device-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9ca3af;
+
+  font-size: 10px;
+}
+
+.recent-device-ip {
+  color: #6b7280;
+
+  font-family: monospace;
+
+  font-size: 11px;
+}
+
+.device-status {
+  min-width: 75px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 6px;
+
+  color: #16a34a;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+.device-status > span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+}
+
+.device-status.offline {
+  color: #9ca3af;
+}
+
+.device-status.offline > span {
+  background: #9ca3af;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  padding: 35px 20px;
+
+  text-align: center;
+
+  color: #9ca3af;
+}
+
+.empty-state > div {
+  font-size: 30px;
+
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  margin: 0;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.about-panel h5 {
+  margin: 0 0 12px;
+
+  color: #1f2937;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.about-panel > p {
+  margin-bottom: 15px;
+
+  color: #6b7280;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.feature {
+  display: flex;
+
+  gap: 13px;
+
+  padding: 13px 0;
+
+  border-top: 1px solid #f1f1f1;
+}
+
+.feature > span {
+  font-size: 20px;
+}
+
+.feature strong {
+  color: #374151;
+
+  font-size: 13px;
+}
+
+.feature p {
+  margin: 4px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-action {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 14px 4px;
+
+  border-bottom: 1px solid #f1f1f1;
+
+  text-decoration: none;
+
+  color: #374151;
+}
+
+.quick-action:last-child {
+  border-bottom: none;
+}
+
+.quick-action > span:first-child {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+.quick-action div {
+  flex: 1;
+}
+
+.quick-action strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+.quick-action small {
+  color: #9ca3af;
+
+  font-size: 10px;
+}
+
+.quick-action:hover {
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .dashboard-header {
+    padding: 22px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .health-panel {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .recent-device-ip {
+    display: none;
+  }
+
+  .device-status {
+    min-width: auto;
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .dashboard-header h3 {
+    font-size: 20px;
+  }
+
+  .network-card {
+    min-height: 150px;
+  }
+
+  .recent-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+}
+

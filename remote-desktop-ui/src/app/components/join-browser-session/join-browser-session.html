@@ -1,0 +1,111 @@
+<div class="join-session-page">
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================== -->
+
+  <main class="join-content">
+    <div class="join-card">
+      <!-- =====================================
+           CARD HEADER
+      ====================================== -->
+
+      <div class="card-header">
+        <div class="card-icon">💻</div>
+
+        <h1>Join Browser Session</h1>
+
+        <p>Enter the PC ID and join code provided by the remote desktop operator.</p>
+      </div>
+      @if (errorMessage) {
+        <div class="error-message" role="alert">
+          <span class="error-icon"> ⚠ </span>
+
+          <span>
+            {{ errorMessage }}
+          </span>
+        </div>
+      }
+
+      <!-- =====================================
+           FORM
+      ====================================== -->
+
+      <form class="join-form" (ngSubmit)="joinSession()">
+        <!-- =================================
+             PC ID
+        ================================== -->
+
+        <div class="form-group mb-2">
+          <label for="pcId"> PC ID </label>
+
+          <input
+            id="pcId"
+            type="text"
+            name="pcId"
+            class="form-control"
+            [(ngModel)]="roomId"
+            placeholder="Enter PC ID"
+            autocomplete="off"
+            [disabled]="joining"
+          />
+        </div>
+
+        <!-- =================================
+             JOIN CODE
+        ================================== -->
+
+        <div class="form-group mb-2">
+          <label for="joinCode"> Join Code </label>
+
+          <input
+            id="joinCode"
+            type="text"
+            name="joinCode"
+            class="form-control join-code-input"
+            [(ngModel)]="joinCode"
+            placeholder="Enter 6-digit join code"
+            maxlength="6"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            autocomplete="off"
+            [disabled]="joining"
+          />
+
+        </div>
+
+
+        <!-- =================================
+             JOIN BUTTON
+        ================================== -->
+
+        <button type="submit" class="join-button" [class.joining]="joining" [disabled]="joining">
+          @if (joining) {
+            <span class="button-spinner"></span>
+
+            <span> Joining... </span>
+          } @else {
+            <span> Join Session </span>
+          }
+        </button>
+      </form>
+
+      <!-- =====================================
+           SECURITY INFO
+      ====================================== -->
+
+      <div class="security-info">
+        <span class="security-icon"> 🔒 </span>
+
+        <div>
+          <strong> Secure Browser Session </strong>
+
+          <p>The join code is temporary and is required to access this video session.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

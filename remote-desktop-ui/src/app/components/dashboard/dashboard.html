@@ -1,0 +1,667 @@
+<div class="dashboard">
+
+  <!-- ===================================================== -->
+  <!-- WELCOME -->
+  <!-- ===================================================== -->
+
+  <div class="d-flex dashboard-header justify-content-center text-center">
+
+    <div class="">
+
+      <h3>
+        Welcome to RemoteDeskApp 👋
+      </h3>
+
+      <p>
+        Monitor and manage devices connected to your network
+        from one centralized dashboard.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- NETWORK OVERVIEW -->
+  <!-- ===================================================== -->
+
+  <div class="section-heading">
+
+    <div>
+
+      <h4>
+        Network Overview
+      </h4>
+
+      <p>
+        Real-time network discovery and device statistics
+      </p>
+
+    </div>
+
+    <a
+      routerLink="/network-devices"
+      class="view-all-link">
+
+      View All Devices
+      <span>→</span>
+
+    </a>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- SUMMARY CARDS -->
+  <!-- ===================================================== -->
+
+  <div class="row g-4">
+
+
+    <!-- TOTAL DEVICES -->
+    <div class="col-sm-6 col-xl-3">
+
+      <div class="network-card">
+
+        <div class="network-card-top">
+
+          <div class="network-icon total">
+            🌐
+          </div>
+
+          <span class="card-arrow">
+            →
+          </span>
+
+        </div>
+
+        <div class="network-card-label">
+          Total Devices
+        </div>
+
+        <div class="network-card-value">
+          {{ networkDeviceCount }}
+        </div>
+
+        <div class="network-card-footer">
+          Devices discovered
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COMPUTERS -->
+    <div class="col-sm-6 col-xl-3">
+
+      <div class="network-card">
+
+        <div class="network-card-top">
+
+          <div class="network-icon computers">
+            💻
+          </div>
+
+          <span class="card-arrow">
+            →
+          </span>
+
+        </div>
+
+        <div class="network-card-label">
+          Computers
+        </div>
+
+        <div class="network-card-value">
+          {{ computerCount }}
+        </div>
+
+        <div class="network-card-footer">
+          Desktop + Laptop
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- MOBILE DEVICES -->
+    <div class="col-sm-6 col-xl-3">
+
+      <div class="network-card">
+
+        <div class="network-card-top">
+
+          <div class="network-icon mobile">
+            📱
+          </div>
+
+          <span class="card-arrow">
+            →
+          </span>
+
+        </div>
+
+        <div class="network-card-label">
+          Mobile Devices
+        </div>
+
+        <div class="network-card-value">
+          {{ mobileDeviceCount }}
+        </div>
+
+        <div class="network-card-footer">
+          Mobile + Tablet
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ROUTERS -->
+    <div class="col-sm-6 col-xl-3">
+
+      <div class="network-card">
+
+        <div class="network-card-top">
+
+          <div class="network-icon router">
+            📡
+          </div>
+
+          <span class="card-arrow">
+            →
+          </span>
+
+        </div>
+
+        <div class="network-card-label">
+          Routers
+        </div>
+
+        <div class="network-card-value">
+          {{ routerCount }}
+        </div>
+
+        <div class="network-card-footer">
+          Network infrastructure
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- NETWORK HEALTH -->
+  <!-- ===================================================== -->
+
+  <div class="health-panel">
+
+    <div class="health-left">
+
+      <div class="health-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <strong>
+          Network Health
+        </strong>
+
+        <p>
+          {{ onlineDeviceCount }} of
+          {{ networkDeviceCount }}
+          discovered devices are currently online.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="health-status">
+
+      <span class="status-dot"></span>
+
+      <span>
+        Network Active
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- CHARTS -->
+  <!-- ===================================================== -->
+
+  <div class="row g-4 mt-1">
+
+
+    <!-- DEVICE DISTRIBUTION -->
+    <div class="col-lg-5">
+
+      <div class="dashboard-panel chart-panel">
+
+        <div class="chart-heading">
+
+          <div>
+
+            <h5>
+              Device Distribution
+            </h5>
+
+            <p>
+              Breakdown of discovered devices
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+          <apx-chart
+            [series]="donutSeries"
+            [chart]="donutChart"
+            [labels]="donutLabels"
+            [colors]="donutColors"
+            [legend]="donutLegend"
+            [dataLabels]="donutDataLabels"
+            [tooltip]="donutTooltip"
+            [responsive]="donutResponsive">
+          </apx-chart>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DEVICE COMPARISON -->
+    <div class="col-lg-7">
+
+      <div class="dashboard-panel chart-panel">
+
+        <div class="chart-heading">
+
+          <div>
+
+            <h5>
+              Devices by Category
+            </h5>
+
+            <p>
+              Compare device types across the network
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="chart-container">
+
+          <apx-chart
+            [series]="barSeries"
+            [chart]="barChart"
+            [plotOptions]="barPlotOptions"
+            [xaxis]="barXAxis"
+            [yaxis]="barYAxis"
+            [dataLabels]="barDataLabels"
+            [legend]="barLegend"
+            [colors]="barColors"
+            [tooltip]="barTooltip">
+          </apx-chart>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- RECENT DEVICES -->
+  <!-- ===================================================== -->
+
+  <div class="dashboard-panel recent-panel">
+
+    <div class="recent-header">
+
+      <div>
+
+        <h5>
+          Recently Discovered Devices
+        </h5>
+
+        <p>
+          Latest devices detected on the network
+        </p>
+
+      </div>
+
+      <a
+        routerLink="/network-devices"
+        class="view-all-link">
+
+        View All →
+        
+      </a>
+
+    </div>
+
+
+    <!-- DEVICE LIST -->
+
+    <div
+      class="recent-device"
+      *ngFor="let device of recentDevices">
+
+      <div class="recent-device-icon">
+
+        <ng-container
+          [ngSwitch]="device.deviceType">
+
+          <span *ngSwitchCase="'router'">
+            📡
+          </span>
+
+          <span *ngSwitchCase="'desktop'">
+            🖥️
+          </span>
+
+          <span *ngSwitchCase="'laptop'">
+            💻
+          </span>
+
+          <span *ngSwitchCase="'mobile'">
+            📱
+          </span>
+
+          <span *ngSwitchCase="'tablet'">
+            📲
+          </span>
+
+          <span *ngSwitchDefault>
+            🌐
+          </span>
+
+        </ng-container>
+
+      </div>
+
+
+      <div class="recent-device-info">
+
+        <strong>
+          {{ device.hostname !== 'Unknown'
+            ? device.hostname
+            : device.ip }}
+        </strong>
+
+        <small>
+
+          {{ device.deviceType | titlecase }}
+
+          <span
+            *ngIf="device.manufacturer !== 'Unknown'">
+
+            · {{ device.manufacturer }}
+
+          </span>
+
+        </small>
+
+      </div>
+
+
+      <div class="recent-device-ip">
+
+        {{ device.ip }}
+
+      </div>
+
+
+      <div
+        class="device-status"
+        [class.offline]="device.status === 'offline'">
+
+        <span></span>
+
+        {{ device.status | titlecase }}
+
+      </div>
+
+    </div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+      class="empty-state"
+      *ngIf="recentDevices.length === 0">
+
+      <div>
+        🌐
+      </div>
+
+      <p>
+        No network devices discovered yet.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- APPLICATION INFORMATION -->
+  <!-- ===================================================== -->
+
+  <div class="row g-4 mt-1">
+
+
+    <!-- ABOUT -->
+    <div class="col-lg-8">
+
+      <div class="dashboard-panel about-panel">
+
+        <h5>
+          Remote Desktop Management
+        </h5>
+
+        <p>
+
+          RemoteDesk is a centralized remote computer
+          management platform that allows authorized users
+          to discover, monitor and access remote machines
+          through a web browser.
+
+        </p>
+
+
+        <div class="feature-list">
+
+          <div class="feature">
+
+            <span>
+              🖥️
+            </span>
+
+            <div>
+
+              <strong>
+                Remote Access
+              </strong>
+
+              <p>
+                Connect to registered computers directly
+                from your browser.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <span>
+              🌐
+            </span>
+
+            <div>
+
+              <strong>
+                Network Discovery
+              </strong>
+
+              <p>
+                Discover computers, mobile devices and
+                network infrastructure on your local network.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <span>
+              🔐
+            </span>
+
+            <div>
+
+              <strong>
+                Secure Management
+              </strong>
+
+              <p>
+                Manage authorized remote connections from
+                a centralized dashboard.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="col-lg-4">
+
+      <div class="dashboard-panel">
+
+        <h5>
+          Quick Actions
+        </h5>
+
+
+        <a
+          routerLink="/network-devices"
+          class="quick-action">
+
+          <span>
+            🌐
+          </span>
+
+          <div>
+
+            <strong>
+              Network Devices
+            </strong>
+
+            <small>
+              Explore discovered devices
+            </small>
+
+          </div>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          routerLink="/remote-pcs"
+          class="quick-action">
+
+          <span>
+            🖥️
+          </span>
+
+          <div>
+
+            <strong>
+              Remote PCs
+            </strong>
+
+            <small>
+              View registered computers
+            </small>
+
+          </div>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          routerLink="/remote-pcs/add"
+          class="quick-action">
+
+          <span>
+            ➕
+          </span>
+
+          <div>
+
+            <strong>
+              Add Remote PC
+            </strong>
+
+            <small>
+              Register a new computer
+            </small>
+
+          </div>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

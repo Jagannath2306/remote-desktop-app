@@ -1,0 +1,665 @@
+
+/* =========================
+   Page
+========================= */
+
+.pc-page {
+  width: 100%;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  color: #1f2937;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+
+  color: #8a94a6;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   Add Button
+========================= */
+
+.add-pc-btn {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  padding: 11px 18px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.add-pc-btn:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+.add-pc-btn span {
+  font-size: 17px;
+
+  margin-right: 5px;
+}
+
+
+/* =========================
+   Statistics
+========================= */
+
+.stats-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+
+  border: 1px solid #e7eaf0;
+
+  border-radius: 12px;
+
+  padding: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 20px;
+}
+
+.stat-icon.total {
+  background: #eff6ff;
+}
+
+.stat-icon.online {
+  background: #ecfdf5;
+
+  color: #16a34a;
+}
+
+.stat-icon.offline {
+  background: #fef2f2;
+
+  color: #dc2626;
+}
+
+.stat-icon.session {
+  background: #f5f3ff;
+}
+
+.stat-card span {
+  display: block;
+
+  color: #8a94a6;
+
+  font-size: 12px;
+
+  margin-bottom: 3px;
+}
+
+.stat-card strong {
+  font-size: 22px;
+
+  color: #1f2937;
+}
+
+
+/* =========================
+   Toolbar
+========================= */
+
+.toolbar {
+  background: white;
+
+  border: 1px solid #e7eaf0;
+
+  border-radius: 12px;
+
+  padding: 15px 18px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.search-box {
+  width: 320px;
+
+  height: 40px;
+
+  border: 1px solid #e2e5eb;
+
+  border-radius: 7px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 12px;
+
+  color: #9ca3af;
+}
+
+.search-box span {
+  font-size: 20px;
+
+  margin-right: 8px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  font-size: 13px;
+}
+
+.filter-buttons {
+  display: flex;
+
+  gap: 5px;
+}
+
+.filter-buttons button {
+  border: none;
+
+  background: transparent;
+
+  padding: 8px 14px;
+
+  border-radius: 6px;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.filter-buttons button:hover {
+  background: #f3f4f6;
+}
+
+.filter-buttons button.selected {
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   PC Grid
+========================= */
+
+.pc-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+
+/* =========================
+   PC Card
+========================= */
+
+.pc-card {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.pc-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================
+   Card Header
+========================= */
+
+.pc-card-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.pc-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.pc-avatar {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 10px;
+
+  background: #eff6ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 20px;
+}
+
+.pc-info h4 {
+  margin: 0;
+
+  font-size: 15px;
+
+  color: #1f2937;
+
+  font-weight: 600;
+}
+
+.pc-id {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9ca3af;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   Status
+========================= */
+
+.status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.status.online {
+  color: #16a34a;
+}
+
+.status.online .status-dot {
+  background: #22c55e;
+}
+
+.status.offline {
+  color: #dc2626;
+}
+
+.status.offline .status-dot {
+  background: #ef4444;
+}
+
+
+/* =========================
+   Divider
+========================= */
+
+.card-divider {
+  height: 1px;
+
+  background: #f0f1f3;
+
+  margin: 18px 0;
+}
+
+
+/* =========================
+   Details
+========================= */
+
+.pc-details {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 15px;
+}
+
+.detail-label {
+  display: block;
+
+  font-size: 10px;
+
+  color: #9ca3af;
+
+  margin-bottom: 4px;
+}
+
+.detail strong {
+  display: block;
+
+  font-size: 12px;
+
+  color: #374151;
+
+  font-weight: 500;
+
+  word-break: break-all;
+}
+
+
+/* =========================
+   Card Footer
+========================= */
+
+.pc-card-footer {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.connect-btn {
+  flex: 1;
+
+  height: 38px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.connect-btn:hover {
+  background: #1d4ed8;
+}
+
+.connect-btn:disabled {
+  background: #d1d5db;
+
+  cursor: not-allowed;
+}
+
+.more-btn {
+  width: 38px;
+
+  height: 38px;
+
+  border: 1px solid #e5e7eb;
+
+  background: white;
+
+  border-radius: 7px;
+
+  color: #6b7280;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+.more-btn:hover {
+  background: #f3f4f6;
+}
+
+
+/* =========================
+   Loading
+========================= */
+
+.loading-container {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #8a94a6;
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+
+  border: 3px solid #e5e7eb;
+
+  border-top-color: #2563eb;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  min-height: 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 28px;
+
+  margin-bottom: 15px;
+}
+
+.empty-state h4 {
+  margin: 0 0 7px;
+
+  color: #374151;
+}
+
+.empty-state p {
+  color: #9ca3af;
+
+  font-size: 13px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 1100px) {
+
+  .pc-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .stats-row {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+}
+

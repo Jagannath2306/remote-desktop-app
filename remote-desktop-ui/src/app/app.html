@@ -1,0 +1,209 @@
+<app-loader></app-loader>
+
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
+
+    <!-- Logo -->
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          🖥️
+        </div>
+
+        @if (!sidebarCollapsed) {
+          <span class="logo-text">RemoteDeskApp</span>
+        }
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="sidebar-menu">
+
+      <div class="menu-title">
+        @if (!sidebarCollapsed) {
+          <span>MAIN</span>
+        }
+      </div>
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon">▦</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Dashboard</span>
+        }
+      </a>
+
+      <a
+         routerLink="/network-devices"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon"> 🌐</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Network Devices</span>
+        }
+      </a>
+
+
+      <a
+        routerLink="/remote-pcs"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon">🖥</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Remote PCs</span>
+        }
+      </a>
+
+
+      <a
+         routerLink="/manage-remote-pc"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <i class="menu-icon">⚙️</i>
+
+        @if (!sidebarCollapsed) {
+          <span>Manage Remote PCs</span>
+        }
+      </a>
+      
+      <a
+        routerLink="/remote-sessions"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon">▣</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Sessions</span>
+        }
+      </a>
+
+
+      <div class="menu-title management-title">
+        @if (!sidebarCollapsed) {
+          <span>MANAGEMENT</span>
+        }
+      </div>
+
+
+      <a
+        routerLink="/users"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon">👥</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Users</span>
+        }
+      </a>
+
+
+      <a
+        routerLink="/settings"
+        routerLinkActive="active"
+        class="menu-item">
+
+        <span class="menu-icon">⚙</span>
+
+        @if (!sidebarCollapsed) {
+          <span>Settings</span>
+        }
+      </a>
+
+    </nav>
+
+
+    <!-- Collapse -->
+    <div class="sidebar-footer">
+
+      <button
+        class="collapse-button"
+        type="button"
+        (click)="toggleSidebar()">
+
+        @if (sidebarCollapsed) {
+          <span>→</span>
+        } @else {
+          <span>←</span>
+          <span>Collapse Menu</span>
+        }
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- Main Area -->
+  <div
+    class="main-area"
+    [class.sidebar-collapsed]="sidebarCollapsed">
+
+    <!-- Header -->
+    <header class="top-header">
+
+      <div class="header-left">
+
+        <button
+          class="mobile-menu"
+          type="button"
+          (click)="toggleSidebar()">
+          ☰
+        </button>
+
+        <div>
+          <h2>Remote Desktop App</h2>
+          <span>Manage your remote machines</span>
+        </div>
+
+      </div>
+
+
+      <div class="header-right">
+
+        <button class="notification">
+          🔔
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="user-profile">
+
+          <div class="avatar">
+            A
+          </div>
+
+          <div class="user-details">
+            <strong>Admin</strong>
+            <small>Administrator</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Content -->
+    <main class="page-content">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </div>
+
+</div>

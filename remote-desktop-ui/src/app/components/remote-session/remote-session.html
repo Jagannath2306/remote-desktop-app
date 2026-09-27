@@ -1,0 +1,182 @@
+<div class="remote-session-page">
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <div class="session-header">
+    <!-- LEFT -->
+
+    <div class="session-info">
+      <h2>Remote Desktop</h2>
+
+      <p>
+        Connected to:
+
+        <strong>
+          {{ pcId }}
+        </strong>
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="session-actions">
+      <!-- VNC STATUS -->
+
+      <div class="connection-status" [class.connected]="connected">
+        <span class="status-dot"> </span>
+
+        @if (connecting) {
+          Connecting...
+        } @else if (connected) {
+          Connected
+        } @else {
+          Disconnected
+        }
+      </div>
+
+      <!-- VIDEO CALL -->
+
+      @if (!showVideoCall) {
+        <button type="button" class="video-call-btn" (click)="startVideoCall()">
+          <span class="video-icon"> 📹 </span>
+
+          Start Video Call
+        </button>
+      } @else {
+        <button type="button" class="video-call-btn active" (click)="closeVideoCall()">
+          <span class="video-icon"> 📹 </span>
+
+          Close Video
+        </button>
+      }
+
+      <!-- FULLSCREEN -->
+
+      <button type="button" class="fullscreen-btn" (click)="toggleFullscreen()">
+        <span class="fullscreen-icon"> ⛶ </span>
+
+        @if (isFullscreen) {
+          Exit Fullscreen
+        } @else {
+          Fullscreen
+        }
+      </button>
+
+      <!-- DISCONNECT -->
+
+      <button type="button" class="disconnect-btn" (click)="disconnect()" [disabled]="!connected">
+        Disconnect
+      </button>
+
+      <!-- BACK -->
+
+      <button type="button" class="back-btn" (click)="backToPcList()">
+        <span class="back-icon"> ← </span>
+
+        Back to PC List
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================
+       ERROR
+  ========================================== -->
+
+  @if (errorMessage) {
+    <div class="error-message">
+      <span class="error-icon"> ⚠ </span>
+
+      <span>
+        {{ errorMessage }}
+      </span>
+    </div>
+  }
+
+  <!-- =========================================
+       WORKSPACE
+  ========================================== -->
+
+  <div class="session-workspace" [class.video-open]="showVideoCall">
+    <!-- =======================================
+         REMOTE DESKTOP
+    ======================================== -->
+
+    <div class="desktop-section">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-icon"> 🖥 </span>
+
+          Remote Screen
+        </div>
+
+        @if (connected) {
+          <span class="screen-status">
+            <span class="screen-status-dot"> </span>
+
+            Live
+          </span>
+        }
+      </div>
+
+      <!--
+        IMPORTANT:
+        noVNC still attaches to this exact
+        #screen element.
+      -->
+
+      <div #screen class="remote-screen"></div>
+    </div>
+
+    <!-- =======================================
+         VIDEO PANEL
+    ======================================== -->
+
+    @if (showVideoCall) {
+      <aside class="video-section">
+        <div class="video-panel-header">
+          <div>
+            <h3>Video Call</h3>
+
+            <div class="d-flex gap-2">
+              <div class="join-code">
+                <span class="join-code-label text-warning"> PC ID : </span>
+                <strong class="join-code-value text-warning">
+                  {{ pcId }}
+                </strong>
+              </div>
+              @if (videoJoinCode) {
+                <div class="join-code">
+                  <span class="join-code-label text-warning"> Join Code : </span>
+
+                  <strong class="join-code-value text-warning">
+                    {{ videoJoinCode }}
+                  </strong>
+                </div>
+              }
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="close-video-btn"
+            title="End video call"
+            (click)="closeVideoPanel()"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="video-component-wrapper">
+          <app-video-call
+            [roomId]="videoSessionId"
+            [hostToken]="videoHostToken"
+            [embedded]="true"
+            (callEnded)="closeVideoCall()"
+          >
+          </app-video-call>
+        </div>
+      </aside>
+    }
+  </div>
+</div>

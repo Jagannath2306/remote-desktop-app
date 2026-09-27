@@ -1,0 +1,736 @@
+
+<div class="manage-page">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <div class="page-header">
+
+    <div class="page-title">
+
+      <h2>
+        Manage Remote Computers
+      </h2>
+
+      <p>
+        Manage computers available for remote access.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-pc-btn"
+      (click)="openAddPc()">
+
+      <span class="btn-icon">
+        +
+      </span>
+
+      Add Remote PC
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOOLBAR
+  ====================================================== -->
+
+  <div class="toolbar">
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        ⌕
+      </span>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+        placeholder="Search by PC name, ID or host...">
+
+    </div>
+
+
+    <div class="toolbar-actions">
+
+      <button
+        type="button"
+        class="toolbar-btn"
+        [disabled]="loading"
+        (click)="refreshStatus()">
+
+        <span
+          class="refresh-icon"
+          [class.spinning]="loading">
+
+          ↻
+
+        </span>
+
+        Refresh
+
+      </button>
+
+
+      <button
+        type="button"
+        class="view-btn"
+        [class.active]="viewMode === 'card'"
+        (click)="viewMode = 'card'">
+
+        ▦
+
+      </button>
+
+
+      <button
+        type="button"
+        class="view-btn"
+        [class.active]="viewMode === 'list'"
+        (click)="viewMode = 'list'">
+
+        ☰
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       SUMMARY
+  ====================================================== -->
+
+  <div class="summary-row">
+
+    <span>
+
+      {{ filteredPcs.length }}
+
+      {{
+        filteredPcs.length === 1
+          ? 'PC'
+          : 'PCs'
+      }}
+
+    </span>
+
+
+    @if (searchText) {
+
+      <span class="search-result-text">
+
+        matching "{{ searchText }}"
+
+      </span>
+
+    }
+
+  </div>
+
+
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
+
+  @if (
+    loading &&
+    pcs.length === 0
+  ) {
+
+    <div class="loading-state">
+
+      <div class="loading-spinner"></div>
+
+      <p>
+        Loading remote PCs...
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       EMPTY
+  ====================================================== -->
+
+  @if (
+    !loading &&
+    filteredPcs.length === 0
+  ) {
+
+    <div class="empty-state">
+
+      <div class="empty-icon">
+        🖥️
+      </div>
+
+
+      @if (searchText) {
+
+        <h3>
+          No PCs found
+        </h3>
+
+        <p>
+          No remote PC matches your search.
+        </p>
+
+
+        <button
+          type="button"
+          class="clear-search-btn"
+          (click)="searchText = ''; onSearch()">
+
+          Clear Search
+
+        </button>
+
+      } @else {
+
+        <h3>
+          No Remote PCs
+        </h3>
+
+        <p>
+          Add your first remote computer to get started.
+        </p>
+
+
+        <button
+          type="button"
+          class="add-empty-btn"
+          (click)="openAddPc()">
+
+          <span>
+            +
+          </span>
+
+          Add Remote PC
+
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       PC CONTENT
+  ====================================================== -->
+
+  @if (
+    filteredPcs.length > 0
+  ) {
+
+    <!-- ===================================================
+         CARD VIEW
+    ==================================================== -->
+
+    @if (
+      viewMode === 'card'
+    ) {
+
+      <div class="pc-grid">
+
+        @for (
+          pc of filteredPcs;
+          track pc.pcId
+        ) {
+
+          <div class="pc-card">
+
+            <!-- CARD HEADER -->
+
+            <div class="pc-card-header">
+
+              <div class="pc-main-info">
+
+                <div class="pc-icon">
+                  🖥️
+                </div>
+
+
+                <div>
+
+                  <h3>
+                    {{ pc.name }}
+                  </h3>
+
+                  <span class="pc-id">
+                    {{ pc.pcId }}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <span
+                class="status-badge"
+                [class.online]="pc.status === 'online'"
+                [class.offline]="pc.status === 'offline'">
+
+                <span class="status-dot"></span>
+
+                {{
+                  pc.status === 'online'
+                    ? 'Online'
+                    : 'Offline'
+                }}
+
+              </span>
+
+            </div>
+
+
+            <!-- CONNECTION -->
+
+            <div class="connection-info">
+
+              <div class="connection-item">
+
+                <span class="connection-label">
+                  Host
+                </span>
+
+                <strong>
+                  {{ pc.host }}
+                </strong>
+
+              </div>
+
+
+              <div class="connection-item">
+
+                <span class="connection-label">
+                  VNC Port
+                </span>
+
+                <strong>
+                  {{ pc.vncPort }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <!-- ACCESS -->
+
+            <div class="pc-active-row">
+
+              <span>
+                Access
+              </span>
+
+
+              <span
+                class="active-badge"
+                [class.active]="pc.isActive"
+                [class.inactive]="!pc.isActive">
+
+                {{
+                  pc.isActive
+                    ? 'Active'
+                    : 'Inactive'
+                }}
+
+              </span>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="pc-card-actions">
+
+              <button
+                type="button"
+                class="connect-btn browser-btn"
+                [disabled]="!pc.isActive"
+                (click)="connectToPc(pc)">
+
+                <span>
+                  ▶
+                </span>
+
+                Connect by Browser
+
+              </button>
+
+
+              <button
+                type="button"
+                class="hardware-btn"
+                [disabled]="!pc.isActive"
+                title="Hardware access will be available in the next step">
+
+                <span>
+                  ⚙
+                </span>
+
+                Access Hardware
+
+              </button>
+
+
+              <button
+                type="button"
+                class="action-btn edit"
+                title="Edit"
+                (click)="openEditPc(pc)">
+
+                ✎
+
+              </button>
+
+
+              <button
+                type="button"
+                class="action-btn delete"
+                title="Delete"
+                (click)="openDeleteModal(pc)">
+
+                ×
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+
+    <!-- ===================================================
+         LIST VIEW
+    ==================================================== -->
+
+    @if (
+      viewMode === 'list'
+    ) {
+
+      <div class="table-card">
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  PC
+                </th>
+
+                <th>
+                  Host
+                </th>
+
+                <th>
+                  VNC Port
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Access
+                </th>
+
+                <th class="actions-column">
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              @for (
+                pc of filteredPcs;
+                track pc.pcId
+              ) {
+
+                <tr>
+
+                  <!-- PC -->
+
+                  <td>
+
+                    <div class="table-pc">
+
+                      <div class="table-pc-icon">
+                        🖥️
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          {{ pc.name }}
+                        </strong>
+
+                        <span>
+                          {{ pc.pcId }}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- HOST -->
+
+                  <td>
+
+                    <span class="host-value">
+                      {{ pc.host }}
+                    </span>
+
+                  </td>
+
+
+                  <!-- PORT -->
+
+                  <td>
+
+                    <span class="port-value">
+                      {{ pc.vncPort }}
+                    </span>
+
+                  </td>
+
+
+                  <!-- STATUS -->
+
+                  <td>
+
+                    <span
+                      class="status-badge table-status"
+                      [class.online]="pc.status === 'online'"
+                      [class.offline]="pc.status === 'offline'">
+
+                      <span class="status-dot"></span>
+
+                      {{
+                        pc.status === 'online'
+                          ? 'Online'
+                          : 'Offline'
+                      }}
+
+                    </span>
+
+                  </td>
+
+
+                  <!-- ACCESS -->
+
+                  <td>
+
+                    <span
+                      class="active-badge"
+                      [class.active]="pc.isActive"
+                      [class.inactive]="!pc.isActive">
+
+                      {{
+                        pc.isActive
+                          ? 'Active'
+                          : 'Inactive'
+                      }}
+
+                    </span>
+
+                  </td>
+
+
+                  <!-- ACTIONS -->
+
+                  <td>
+
+                    <div class="table-actions">
+
+                      <button
+                        type="button"
+                        class="connect-btn small"
+                        [disabled]="!pc.isActive"
+                        (click)="connectToPc(pc)">
+
+                        ▶
+
+                        Connect
+
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="action-btn edit"
+                        title="Edit"
+                        (click)="openEditPc(pc)">
+
+                        ✎
+
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="action-btn delete"
+                        title="Delete"
+                        (click)="openDeleteModal(pc)">
+
+                        ×
+
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    }
+
+  }
+
+
+  <!-- =====================================================
+       ADD / EDIT MODAL
+  ====================================================== -->
+
+  @if (showPcCreate) {
+
+    <div
+      class="pc-create-overlay"
+      (click)="closePcCreate()">
+
+      <div
+        class="pc-create-modal"
+        (click)="$event.stopPropagation()">
+
+        <app-pc-create
+          [mode]="pcCreateMode"
+          [pc]="selectedPc"
+          [isModal]="true"
+          [saving]="saving"
+          (closed)="closePcCreate()"
+          (saved)="onPcSaved($event)">
+        </app-pc-create>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- =====================================================
+       DELETE MODAL
+  ====================================================== -->
+
+  @if (showDeleteModal) {
+
+    <div
+      class="delete-overlay"
+      (click)="closeDeleteModal()">
+
+      <div
+        class="delete-modal"
+        (click)="$event.stopPropagation()">
+
+        <div class="delete-icon">
+          !
+        </div>
+
+
+        <h3>
+          Delete Remote PC?
+        </h3>
+
+
+        <p>
+
+          Are you sure you want to delete
+
+          <strong>
+            {{ pcToDelete?.name }}
+          </strong>?
+
+          This action cannot be undone.
+
+        </p>
+
+
+        <div class="delete-actions">
+
+          <button
+            type="button"
+            class="cancel-delete-btn"
+            [disabled]="deleting"
+            (click)="closeDeleteModal()">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+            class="confirm-delete-btn"
+            [disabled]="deleting"
+            (click)="confirmDelete()">
+
+            @if (deleting) {
+
+              <span class="button-loader"></span>
+
+              Deleting...
+
+            } @else {
+
+              Delete PC
+
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

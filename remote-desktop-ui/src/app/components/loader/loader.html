@@ -1,0 +1,47 @@
+<div
+  class="loader-overlay"
+  *ngIf="loaderService.isLoading()">
+
+  <div class="loader-card">
+
+    <!-- Animated Logo -->
+    <div class="loader-logo">
+
+      <div class="logo-ring"></div>
+
+      <div class="logo-core">
+        🌐
+      </div>
+
+    </div>
+
+
+    <!-- Loading Text -->
+
+    <div class="loader-content">
+
+      <div class="loader-title">
+        RemoteDesk
+      </div>
+
+      <div class="loader-message">
+        Loading...
+      </div>
+
+    </div>
+
+
+    <!-- Progress dots -->
+
+    <div class="loader-dots">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+  </div>
+
+</div>
+

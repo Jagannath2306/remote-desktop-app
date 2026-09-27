@@ -1,0 +1,178 @@
+<div class="video-call" [class.embedded]="embedded">
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header class="call-header">
+    <!-- LEFT SIDE -->
+
+    <div class="header-left">
+      
+      <div class="session-info text-warning">
+        <!-- <h5 class="app-title mt-1">Remote PC : </h5> -->
+
+        <strong><span class="room-info "> Room ID : {{ roomId }} </span></strong>
+      </div>
+    </div>
+
+    <!-- CONNECTION STATUS -->
+
+    <div class="connection-status">
+      <span
+        class="status-dot"
+        [class.connected]="connectionStatus === 'connected'"
+        [class.connecting]="connectionStatus === 'connecting'"
+        [class.disconnected]="connectionStatus === 'disconnected'"
+      >
+      </span>
+
+      <span>
+        {{ connectionStatus | titlecase }}
+      </span>
+    </div>
+  </header>
+
+  <!-- =========================================
+       VIDEO AREA
+  ========================================== -->
+
+  <main class="video-container">
+    <!-- =======================================
+         REMOTE VIDEO
+    ======================================== -->
+
+    <div class="remote-video" #remoteVideoContainer>
+      <div class="remote-media-status">
+        @if (!remoteMicrophoneEnabled) {
+          <div class="remote-status-badge">🔇 Remote Muted</div>
+        }
+
+        @if (!remoteCameraEnabled) {
+          <div class="remote-status-badge">📷 Camera Off</div>
+        }
+      </div>
+      <video #remoteVideo autoplay playsinline></video>
+
+      <!--
+        Keep the placeholder in the DOM.
+
+        When the remote video starts playing,
+        remoteVideoPlaying becomes true and
+        the .hidden class removes the overlay.
+      -->
+
+      <div class="remote-placeholder" [class.hidden]="remoteVideoPlaying">
+        <div class="placeholder-icon">👤</div>
+
+        <div class="placeholder-title">
+          @if (connectionStatus === 'connecting') {
+            Connecting...
+          } @else if (connectionStatus === 'disconnected') {
+            Waiting for remote user
+          } @else {
+            Loading remote video...
+          }
+        </div>
+
+        <div class="placeholder-text">
+          @if (connectionStatus === 'connecting') {
+            Establishing video connection
+          } @else if (connectionStatus === 'disconnected') {
+            Waiting for the remote browser to join this session
+          } @else {
+            The remote video will appear here
+          }
+        </div>
+      </div>
+      @if (connectionStatus === 'connected' && !remoteCameraEnabled) {
+        <div class="remote-camera-off">
+          <div class="remote-camera-off-icon">🚫</div>
+
+          <div class="remote-camera-off-title">Remote Camera Off</div>
+        </div>
+      }
+    </div>
+
+    <!-- =======================================
+         LOCAL VIDEO
+    ======================================== -->
+
+    <div class="local-video">
+      <video #localVideo autoplay muted playsinline></video>
+
+      <!-- CAMERA OFF OVERLAY -->
+
+      @if (!cameraEnabled) {
+        <div class="camera-off">
+          <span> Camera Off </span>
+        </div>
+      }
+    </div>
+  </main>
+
+  <!-- =========================================
+       CALL CONTROLS
+  ========================================== -->
+
+  <footer class="call-controls">
+    <!-- =======================================
+         MICROPHONE
+    ======================================== -->
+
+    <button
+      type="button"
+      class="control-button"
+      [class.active]="microphoneEnabled"
+      [class.disabled]="!microphoneEnabled"
+      (click)="muteMicrophone()"
+    >
+      <span class="control-icon">
+        {{ microphoneEnabled ? '🎤' : '🔇' }}
+      </span>
+
+      <span class="control-label">
+        {{ microphoneEnabled ? 'Mute' : 'Unmute' }}
+      </span>
+    </button>
+
+    <!-- =======================================
+         CAMERA
+    ======================================== -->
+
+    <button
+      type="button"
+      class="control-button"
+      [class.active]="cameraEnabled"
+      [class.disabled]="!cameraEnabled"
+      (click)="toggleCamera()"
+    >
+      <span class="control-icon">
+        {{ cameraEnabled ? '📹' : '🚫' }}
+      </span>
+
+      <span class="control-label">
+        {{ cameraEnabled ? 'Camera' : 'Camera Off' }}
+      </span>
+    </button>
+
+    <!-- =======================================
+         FULLSCREEN
+    ======================================== -->
+
+    <button type="button" class="control-button" (click)="toggleFullscreen()">
+      <span class="control-icon"> ⛶ </span>
+
+      <span class="control-label"> Fullscreen </span>
+    </button>
+
+    <!-- =======================================
+         END CALL
+    ======================================== -->
+
+    <button type="button" class="control-button end-call" (click)="endCall()">
+      <span class="control-icon"> ☎ </span>
+
+      <span class="control-label"> End Call </span>
+    </button>
+  </footer>
+</div>
